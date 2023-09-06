@@ -5,7 +5,6 @@
   "homepage": "https://isapoloni.github.io/FrontEndFullStackII",
   "type": "module",
   "scripts": {
-    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
