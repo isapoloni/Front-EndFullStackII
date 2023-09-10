@@ -2,7 +2,7 @@
   "name": "projeto-interdisciplinar",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://isapoloni.github.io/Front-EndFullStackII/",
+  "homepage": "https://isapoloni.github.io/Front-EndFullStackII",
   "type": "module",
   "scripts": {
     "dev": "vite",
