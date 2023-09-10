@@ -2,14 +2,15 @@
   "name": "projeto-interdisciplinar",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://isapoloni.github.io/FrontEndFullStackII",
+  "homepage": "https://isapoloni.github.io/Front-EndFullStackII/",
   "type": "module",
   "scripts": {
-    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
