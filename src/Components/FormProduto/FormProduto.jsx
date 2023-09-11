@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Form, Button, Col, Row, Stack, } from "react-bootstrap";
 import { urlBackend } from "../../assets/funcoes";
+import { useNavigate } from "react-router-dom"; 
 
 
 export default function ProdutoForm(props) {
   const [validated, setValidated] = useState(false);
   const [produto, setProduto] = useState(props.produto);
-
+  const navigate = useNavigate();
 
   function manipularOnChange(e) {
     const elementForm = e.currentTarget;
@@ -36,7 +37,7 @@ export default function ProdutoForm(props) {
               novaLista.push(produto)
               props.setProdutos(novaLista)
               props.buscarProduto()
-              props.exibirTabela(true)
+              // props.exibirTabela(true)
             }
             window.alert(dados.mensagem)
           })
@@ -53,8 +54,8 @@ export default function ProdutoForm(props) {
           body: JSON.stringify(produto)
         })
           .then((resposta) => {
-
-            window.location.reload();
+              navigate(`/${repoName}/CadastroProduto`);
+            // window.location.reload();
             return resposta.json()
 
           })

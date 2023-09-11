@@ -1,6 +1,6 @@
 import SearchBar from "../../Components/BarraBusca/BarraBusca.jsx";
 import { useEffect, useState } from "react";
-
+import Header from '../../Components/Header/index.jsx'
 
 export default function TelaBarraBusca() {
 
@@ -28,6 +28,7 @@ export default function TelaBarraBusca() {
 
     return (
         <>
+            <Header />
             <SearchBar
                 placeHolder={'Informe a categoria do produto'}
                 dados={listaProdutos}
