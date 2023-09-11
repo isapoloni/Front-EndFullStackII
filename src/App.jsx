@@ -6,15 +6,17 @@ import CadCategoria from "./Pages/CadCategoria/TelaCadCategoria";
 import TelaBarraBusca from "./Pages/Busca/TelaBarraBusca";
 
 function App() {
+  const repoName = "Front-EndFullStackII";
+  
   return (
     <>
-      <BrowserRouter>
+     <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/Home" element={<Home />} />
-          <Route path="/CadastroProduto" element={<CadProdutos />} />
-          <Route path="/CadastroCategoria" element={<CadCategoria/>} />
-          <Route path="/Buscar" element={<TelaBarraBusca/>} />
+          <Route path={`/${repoName}`} element={<Login />} />
+          <Route path={`/${repoName}/Home`} element={<Home />} />
+          <Route path={`/${repoName}/CadastroProduto`} element={<CadProdutos />} />
+          <Route path={`/${repoName}/CadastroCategoria`} element={<CadCategoria/>} />
+          <Route path={`/${repoName}/Buscar`} element={<TelaBarraBusca/>} />
         </Routes>
       </BrowserRouter>
     </>

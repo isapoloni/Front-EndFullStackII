@@ -1,4 +1,3 @@
-
 import Container from "react-bootstrap/Container";
 import { Nav, Navbar } from "react-bootstrap";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -7,6 +6,8 @@ import "./styled.css";
 import Logo from "../../assets/logo-igreja.png";
 
 export default function Header() {
+  const repoName = "Front-EndFullStackII"; 
+
   return (
     <>
       {[false].map((expand) => (
@@ -62,19 +63,19 @@ export default function Header() {
                     className="justify-content-end flex-grow-1 pe-3"
                     id="sidebar"
                   >
-                    <NavLink id="navlink" to="/Home">
+                    <NavLink id="navlink" to={`/${repoName}/Home`}>
                       Home
                     </NavLink>
                     <hr />
-                    <NavLink id="navlink" to="/CadastroProduto">
+                    <NavLink id="navlink" to={`/${repoName}/CadastroProduto`}>
                       Cadastro Produto
                     </NavLink>
                     <hr />
-                    <NavLink id="navlink" to="/CadastroCategoria">
+                    <NavLink id="navlink" to={`/${repoName}/CadastroCategoria`}>
                       Cadastro Categoria
                     </NavLink>
                     <hr />
-                    <NavLink id="navlink" to="/Buscar">
+                    <NavLink id="navlink" to={`/${repoName}/Buscar`}>
                       Buscar
                     </NavLink>
                     <hr />
