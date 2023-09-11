@@ -8,13 +8,14 @@ function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const repoName = "Front-EndFullStackII"; // Substitua pelo nome do seu repositório
 
   const handleSubmit = () => {
     if (username === "admin" && password === "123456") {
       console.log("Autenticação bem-sucedida");
 
       // Redirecionar para a página inicial
-      navigate("/Home");
+      navigate(`/${repoName}/Home`);
     } else {
       // Autenticação falhou
       alert("Credenciais inválidas");
