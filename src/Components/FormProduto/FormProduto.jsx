@@ -37,7 +37,7 @@ export default function ProdutoForm(props) {
               novaLista.push(produto)
               props.setProdutos(novaLista)
               props.buscarProduto()
-              // props.exibirTabela(true)
+              props.exibirTabela(true)
             }
             window.alert(dados.mensagem)
           })
@@ -54,8 +54,7 @@ export default function ProdutoForm(props) {
           body: JSON.stringify(produto)
         })
           .then((resposta) => {
-              navigate(`/${repoName}/CadastroProduto`);
-            // window.location.reload();
+            window.location.reload();
             return resposta.json()
 
           })
