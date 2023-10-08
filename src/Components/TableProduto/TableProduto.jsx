@@ -91,6 +91,7 @@ export default function TableProduto(props) {
                     onClick={() => {
                       if (window.confirm("Deseja excluir?")) {
                         props.deletar(produto);
+                        window
                       }
                     }}
                   >

@@ -54,7 +54,7 @@ export default function ProdutoForm(props) {
           body: JSON.stringify(produto)
         })
           .then((resposta) => {
-            window.location.reload();
+            // window.location.reload();
             return resposta.json()
 
           })

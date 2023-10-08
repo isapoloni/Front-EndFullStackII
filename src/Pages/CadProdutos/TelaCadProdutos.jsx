@@ -24,7 +24,7 @@ export default function CadProdutos(props) {
 
   function prepararTela(produto) {
     setModoEdicao(true);
-  
+
     setProdutoEdicao(produto);
     setExibirTabela(false)
 
@@ -37,7 +37,7 @@ export default function CadProdutos(props) {
       body: JSON.stringify(produto)
     }).then((resposta) => {
       window.alert('Produto excluído com sucesso!!!')
-      window.location.reload();
+      // window.location.reload();
       return resposta.json()
     })
   }
