@@ -21,7 +21,6 @@ export default function CadCategoria(props) {
     setModoEdicao(true);
     setCategoriaEdicao(categoria);
     setExibirTabela(false)
-
   }
 
   function deletarCategoria(categoria) {
@@ -31,10 +30,11 @@ export default function CadCategoria(props) {
       body: JSON.stringify(categoria)
     }).then((resposta) => {
       window.alert('Categoria excluído com sucesso!!!')
-      window.location.reload();
+      // window.location.reload();
       return resposta.json()
     })
   }
+
 
   useEffect(() => {
     buscar()
@@ -80,7 +80,6 @@ export default function CadCategoria(props) {
               categoria={categoriaEdicao}
               buscar={buscar}
             />
-
         }
       </Container>
     </>

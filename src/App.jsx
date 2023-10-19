@@ -4,7 +4,7 @@ import Home from "./Pages/Home";
 import CadProdutos from "./Pages/CadProdutos/TelaCadProdutos";
 import CadCategoria from "./Pages/CadCategoria/TelaCadCategoria";
 import TelaBarraBusca from "./Pages/Busca/TelaBarraBusca";
-import TelaDoacao from "./Pages/Doacoa/TelaDocao";
+import TelaDoacao from "./Pages/Doacao/TelaDoacao";
 
 function App() {
   const repoName = "Front-EndFullStackII";

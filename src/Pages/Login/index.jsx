@@ -8,7 +8,7 @@ function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const repoName = "Front-EndFullStackII"; // Substitua pelo nome do seu repositório
+  const repoName = "Front-EndFullStackII"; 
 
   const handleSubmit = () => {
     if (username === "admin" && password === "123456") {

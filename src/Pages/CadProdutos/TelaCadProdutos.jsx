@@ -26,25 +26,24 @@ export default function CadProdutos(props) {
     setModoEdicao(true);
 
     setProdutoEdicao(produto);
-    setExibirTabela(false)
-
+    setExibirTabela(false);
   }
 
   function deletarProduto(produto) {
-    fetch(urlBackend + '/produto', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(produto)
+    fetch(urlBackend + "/produto", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(produto),
     }).then((resposta) => {
-      window.alert('Produto excluído com sucesso!!!')
-      // window.location.reload();
-      return resposta.json()
-    })
+      window.alert("Produto excluído com sucesso!!!");
+      
+      return resposta.json();
+    });
   }
 
   useEffect(() => {
-    buscarProduto()
-    buscarCategoria()
+    buscarProduto();
+    buscarCategoria();
   }, []);
 
   function buscarProduto() {
@@ -62,6 +61,7 @@ export default function CadProdutos(props) {
     });
   }
 
+  
   function buscarCategoria() {
     fetch(urlBackend + '/categoriaProduto', {
       method: "GET"
@@ -72,7 +72,7 @@ export default function CadProdutos(props) {
         setCategoria(dados)
       }
       else {
-
+        
       }
     });
   }

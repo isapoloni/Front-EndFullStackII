@@ -55,6 +55,7 @@ export default function ProdutoForm(props) {
         })
           .then((resposta) => {
             // window.location.reload();
+            props.exibirTabela(true)
             return resposta.json()
 
           })

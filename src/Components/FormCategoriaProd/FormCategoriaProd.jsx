@@ -38,6 +38,7 @@ export default function CategoriaForm(props) {
                             props.exibirTabela(true)
                         }
                         window.alert(dados.mensagem)
+                        window.alert('deu bom')
                     })
                     .catch((erro) => {
                         window.alert("Erro ao executar a requisição: " + erro.message)
@@ -54,6 +55,7 @@ export default function CategoriaForm(props) {
                     .then((resposta) => {
 
                         // window.location.reload();
+                        props.exibirTabela(true)
                         return resposta.json()
 
                     })

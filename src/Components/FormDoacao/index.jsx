@@ -5,8 +5,8 @@ import { urlBackend } from '../../assets/funcoes';
 const FormDoacao = (props) => {
     const [doadorOptions, setDoadorOptions] = useState([]);
     const [produtoOptions, setProdutoOptions] = useState([]);
-    const [pessoasData, setPessoasData] = useState([]); // Adicione este estado
-    const [produtosData, setProdutosData] = useState([]); // Adicione este estado
+    const [pessoasData, setPessoasData] = useState([]);
+    const [produtosData, setProdutosData] = useState([]); 
     const [doacao, setDoacao] = useState({
         doador: null, // Alterado para armazenar o objeto do doador completo
         dataDoacao: '',
@@ -141,6 +141,8 @@ const FormDoacao = (props) => {
             if (response.ok) {
                 window.alert('Doação enviada com sucesso!');
                 console.log('Doação enviada com sucesso!', JSON.stringify(requestBody));
+                props.exibirTabela(true);
+
                 // Limpa o formulário após o envio bem-sucedido
                 setDoacao({
                     doador: null,
@@ -234,7 +236,7 @@ const FormDoacao = (props) => {
             >
                 Voltar
             </Button>
-            <Button variant="primary" type="submit" onSubmit={handleSubmit} >
+            <Button variant="primary" type="submit" onSubmit={handleSubmit} gap={3} >
                 Enviar Doação
             </Button>
         </Form>
