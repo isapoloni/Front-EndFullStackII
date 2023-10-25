@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
-import  CategoriaForm from "../../Components/FormCategoriaProd/FormCategoriaProd"
+import CategoriaForm from "../../Components/FormCategoriaProd/FormCategoriaProd"
 import TableCategoria from "../../Components/TableCategoriaProd/TableCategoriaProd";
 import { urlBackend } from "../../assets/funcoes";
 import Header from "../../Components/Header";
@@ -30,7 +30,7 @@ export default function CadCategoria(props) {
       body: JSON.stringify(categoria)
     }).then((resposta) => {
       window.alert('Categoria excluído com sucesso!!!')
-      // window.location.reload();
+      window.location.reload();
       return resposta.json()
     })
   }
@@ -40,20 +40,25 @@ export default function CadCategoria(props) {
     buscar()
   }, []);
 
-  function buscar(){
+  function buscar() {
     fetch(urlBackend + '/categoriaProduto', {
-        method: "GET"
-      }).then((resposta) => {
-        return resposta.json()
-      }).then((dados) => {
-        if (Array.isArray(dados)) {
-          setCategorias(dados)
-  
-        }
-        else {
-  
-        }
-      });
+      method: "GET"
+    }).then((resposta) => {
+      return resposta.json()
+    }).then((dados) => {
+      if (Array.isArray(dados)) {
+        setCategorias(dados)
+
+      }
+      else {
+
+      }
+    });
+  }
+
+  function exibirTabelaEAtualizarDados() {
+    setExibirTabela(true);
+    buscar();
   }
 
   return (
@@ -79,6 +84,7 @@ export default function CadCategoria(props) {
               setModoEdicao={setModoEdicao}
               categoria={categoriaEdicao}
               buscar={buscar}
+              dadosAtualizados={exibirTabelaEAtualizarDados}
             />
         }
       </Container>

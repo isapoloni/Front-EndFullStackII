@@ -12,7 +12,7 @@ function Login() {
 
   const handleSubmit = () => {
     if (username === "admin" && password === "123456") {
-      console.log("Autenticação bem-sucedida");
+      // console.log("Autenticação bem-sucedida");
 
       // Redirecionar para a página inicial
       navigate(`/${repoName}/Home`);

@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Form, Button, Col, Row, Stack, } from "react-bootstrap";
 import { urlBackend } from "../../assets/funcoes";
-import { useNavigate } from "react-router-dom"; 
-
+import { useNavigate } from "react-router-dom";
+import { DropdownList } from 'react-widgets';
+import 'react-widgets/styles.css';
 
 export default function ProdutoForm(props) {
   const [validated, setValidated] = useState(false);
   const [produto, setProduto] = useState(props.produto);
   const navigate = useNavigate();
+  const repoName = "Front-EndFullStackII"; 
 
   function manipularOnChange(e) {
     const elementForm = e.currentTarget;
@@ -37,12 +39,17 @@ export default function ProdutoForm(props) {
               novaLista.push(produto)
               props.setProdutos(novaLista)
               props.buscarProduto()
-              props.exibirTabela(true)
+              props.dadosAtualizados()
             }
             window.alert(dados.mensagem)
+            console.log('Corpo da requisição:', JSON.stringify(produto)); 
+            console.log('caiu aqui', dados)
           })
           .catch((erro) => {
+            console.log('Corpo da requisição:', JSON.stringify(produto)); 
             window.alert("Erro ao executar a requisição: " + erro.message)
+            console.log('deu ruim', erro)
+            console.log('dados', dados)
           })
       }
       else {
@@ -54,8 +61,8 @@ export default function ProdutoForm(props) {
           body: JSON.stringify(produto)
         })
           .then((resposta) => {
-            // window.location.reload();
-            props.exibirTabela(true)
+            console.log('Corpo da requisição:', JSON.stringify(produto)); 
+            props.dadosAtualizados()
             return resposta.json()
 
           })
@@ -142,7 +149,7 @@ export default function ProdutoForm(props) {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Row>
+        {/* <Row>
           {
 
             <Col>
@@ -167,22 +174,47 @@ export default function ProdutoForm(props) {
               </Form.Group>
             </Col>
           }
-        </Row>
+        </Row> */}
 
-        <Stack className="mt-3 mb-3" direction="horizontal" gap={3}>
-          <Button variant="primary" type="submit">
-            {props.modoEdicao ? "Atualizar" : "Cadastrar"}
-          </Button>
-          <Button
-            variant="danger"
-            type="button"
-            onClick={() => {
-              props.exibirTabela(true);
-            }}
-          >
-            Voltar
-          </Button>
+        <Col>
+          <Form.Group>
+            <Form.Label>Categoria</Form.Label>
+            <DropdownList
+              value={props.categorias.find(categoria => categoria.codigo === produto.codigoCategoria)}
+              data={props.categorias}
+              textField="categoria"
+              valueField="codigo"
+              onChange={(value) => {
+                const codigoCategoriaSelecionada = value && value.codigo;
+                setProduto({ ...produto, codigoCategoria: codigoCategoriaSelecionada });
+              }}
+              placeholder="Selecione ou busque uma categoria"
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Por favor, informe a categoria!
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Col>
+
+
+        <div className="d-flex justify-content-end mt-3 mb-3">
+        <Stack className="mt-3 mb-3" direction="horizontal" gap={3} >
+            <Button variant="primary" type="submit">
+              {props.modoEdicao ? "Atualizar" : "Cadastrar"}
+            </Button>
+            <Button
+              variant="danger"
+              type="button"
+              onClick={() => {
+                props.exibirTabela(true);
+                // navigate(`/${repoName}/CadastroProduto`);
+              }}
+            >
+              Voltar
+            </Button>
         </Stack>
+        </div>
       </Form>
     </>
   );

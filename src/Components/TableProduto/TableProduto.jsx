@@ -106,8 +106,8 @@ export default function TableProduto(props) {
                   >
                     <MdModeEdit />
                   </IconButton>
-                  {' '}
-                  {/* <IconButton
+                  {/* {' '}
+                  <IconButton
                     variant="outlined"
                     style={{ color: '#cc3116' }}
                     onClick={() => {

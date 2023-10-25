@@ -18,7 +18,7 @@ export default function Menu(props) {
               <NavDropdown.Divider />
               <LinkContainer to={`/${repoName}/CadastroProduto`}><NavDropdown.Item> Cadastro Produto</NavDropdown.Item></LinkContainer>
               <LinkContainer to={`/${repoName}/CadastroCategoria`}><NavDropdown.Item> Cadastro Categoria</NavDropdown.Item></LinkContainer>              
-              <LinkContainer to={`/${repoName}/Buscar`}><NavDropdown.Item> Buscar</NavDropdown.Item></LinkContainer>
+              {/* <LinkContainer to={`/${repoName}/Buscar`}><NavDropdown.Item> Buscar</NavDropdown.Item></LinkContainer> */}
               <LinkContainer to={`/${repoName}/Doacao`}><NavDropdown.Item> Doacao</NavDropdown.Item></LinkContainer>
             </NavDropdown>
           </Nav>

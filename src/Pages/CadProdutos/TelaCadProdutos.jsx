@@ -46,6 +46,7 @@ export default function CadProdutos(props) {
     buscarCategoria();
   }, []);
 
+
   function buscarProduto() {
     fetch(urlBackend + '/produto', {
       method: "GET"
@@ -54,14 +55,17 @@ export default function CadProdutos(props) {
     }).then((dados) => {
       if (Array.isArray(dados)) {
         setProdutos(dados)
-      }
-      else {
+      } else {
 
       }
     });
   }
 
-  
+  function exibirTabelaEAtualizarDados() {
+    setExibirTabela(true);
+    buscarProduto();
+  }
+
   function buscarCategoria() {
     fetch(urlBackend + '/categoriaProduto', {
       method: "GET"
@@ -102,6 +106,7 @@ export default function CadProdutos(props) {
               produto={produtoEdicao}
               buscarProduto={buscarProduto}
               categorias={categoria}
+              dadosAtualizados={exibirTabelaEAtualizarDados}
             />
 
         }

@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, FormControl, InputGroup } from 'react-bootstrap';
+import { Form, Button, FormControl, InputGroup, Stack } from 'react-bootstrap';
 import { urlBackend } from '../../assets/funcoes';
+import { DropdownList } from 'react-widgets';
+import { useNavigate } from "react-router-dom";
 
 const FormDoacao = (props) => {
     const [doadorOptions, setDoadorOptions] = useState([]);
     const [produtoOptions, setProdutoOptions] = useState([]);
     const [pessoasData, setPessoasData] = useState([]);
-    const [produtosData, setProdutosData] = useState([]); 
+    const [produtosData, setProdutosData] = useState([]);
     const [doacao, setDoacao] = useState({
         doador: null, // Alterado para armazenar o objeto do doador completo
         dataDoacao: '',
         listaItens: [],
     });
+
+    const navigate = useNavigate();
+    const repoName = "Front-EndFullStackII"; 
 
     // Funções para buscar doadores e produtos 
     useEffect(() => {
@@ -64,9 +69,9 @@ const FormDoacao = (props) => {
     // console.log('doadorOptions', doadorOptions)
     console.log('produtoOptions', produtoOptions)
 
-    const handleDoadorChange = (e) => {
+    const handleDoadorChange = (selectedValue) => {
         // Encontra o objeto do doador correspondente ao nome selecionado
-        const doadorSelecionado = pessoasData.find((pessoa) => pessoa.nome === e.target.value);
+        const doadorSelecionado = pessoasData.find((pessoa) => pessoa.nome === selectedValue);
 
         // Atualiza o estado doacao com o doador selecionado
         setDoacao({ ...doacao, doador: doadorSelecionado });
@@ -102,11 +107,17 @@ const FormDoacao = (props) => {
             listaItens: [...doacao.listaItens, { produto: '', quantidade: 1 }],
         });
     };
+
     const handleRemoveItem = (index) => {
         // Remove o item correspondente ao índice da lista
         const updatedItens = [...doacao.listaItens];
         updatedItens.splice(index, 1);
         setDoacao({ ...doacao, listaItens: updatedItens });
+    };
+
+    const handleNavigation = () => {
+        // Navega para a rota desejada
+        navigate(`/${repoName}/Doacao`);
     };
 
     const handleSubmit = async (e) => {
@@ -140,15 +151,15 @@ const FormDoacao = (props) => {
 
             if (response.ok) {
                 window.alert('Doação enviada com sucesso!');
-                console.log('Doação enviada com sucesso!', JSON.stringify(requestBody));
-                props.exibirTabela(true);
-
+                console.log('Doação enviada com sucesso! body:', JSON.stringify(requestBody));
+            
                 // Limpa o formulário após o envio bem-sucedido
                 setDoacao({
                     doador: null,
                     dataDoacao: '',
                     listaItens: [],
                 });
+                props.dadosAtualizados()
             } else {
                 window.alert('Erro ao enviar a doação.');
                 console.error('Erro ao enviar a doação.', JSON.stringify(requestBody));
@@ -160,24 +171,32 @@ const FormDoacao = (props) => {
     };
 
     return (
-        <Form onSubmit={handleSubmit} >
+        <Form onSubmit={handleSubmit}>
+
+            {/* <Form.Group className="mb-3">
+                <Form.Label>Doador</Form.Label>
+                <InputGroup className="mb-3">
+                    <DropdownList
+                        data={doadorOptions}
+                        value={doacao.doador ? doacao.doador.nome : ''}
+                        onChange={handleDoadorChange}
+                        placeholder="Selecione um doador"
+                    />
+                </InputGroup>
+            </Form.Group> */}
+
             <Form.Group className="mb-3">
                 <Form.Label>Doador</Form.Label>
                 <InputGroup className="mb-3">
-                    <FormControl
-                        as="select"
-                        onChange={handleDoadorChange}
-                        value={doacao.doador ? doacao.doador.nome : ''}
-                    >
-                        <option value="" disabled>
-                            Selecione um doador
-                        </option>
-                        {doadorOptions.map((doador, index) => (
-                            <option key={index} value={doador}>
-                                {doador}
-                            </option>
-                        ))}
-                    </FormControl>
+                    <DropdownList
+                        data={doadorOptions}
+                        value={doacao.doador ? doacao.doador.nome : null}
+                        onChange={(value) => handleDoadorChange(value)}
+                        textField="nome" // Certifique-se de substituir 'nome' pelo campo correto que contém o nome do doador
+                        placeholder="Selecione um doador"
+                        caseSensitive={false} // Ignora a sensibilidade de maiúsculas/minúsculas na pesquisa
+                        filter="contains" // Usa a pesquisa "contains" em vez de "startsWith"
+                    />
                 </InputGroup>
             </Form.Group>
 
@@ -190,55 +209,59 @@ const FormDoacao = (props) => {
                 />
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-4" >
                 <Form.Label className="mb-3">Itens da Doação</Form.Label>
                 {doacao.listaItens.map((item, index) => (
                     <div key={index} className="mb-3">
                         <InputGroup className="mb-3">
-                            <FormControl
-                                as="select"
-                                onChange={(e) => handleProdutoChange(index, e)}
-                                value={item.produto ? item.produto.nome : ''}
-                            >
-                                <option value="" disabled>
-                                    Selecione um produto
-                                </option>
-                                {produtoOptions.map((produto, index) => (
-                                    <option key={index} value={produto}>
-                                        {produto}
-                                    </option>
-                                ))}
-                            </FormControl>
-                            <FormControl
-                                type="number"
-                                min="1"
-                                onChange={(e) => handleQuantidadeChange(index, e)}
-                                value={item.quantidade}
-                            />
+                            <div className="d-flex">
+                                <DropdownList
+                                    data={produtoOptions}
+                                    value={item.produto ? item.produto.nome : null}
+                                    onChange={(value) => handleProdutoChange(index, { target: { value } })}
+                                    textField="nome"
+                                    placeholder="Selecione um produto"
+                                    caseSensitive={false}
+                                    filter="contains"
+                                />
+                                <FormControl
+                                    type="number"
+                                    min="1"
+                                    onChange={(e) => handleQuantidadeChange(index, e)}
+                                    value={item.quantidade}
+                                    className="ml-3"
+                                />
+                            </div>
                             <Button variant="danger" onClick={() => handleRemoveItem(index)}>
                                 Remover
                             </Button>
                         </InputGroup>
                     </div>
                 ))}
-                <Button variant="secondary" onClick={handleAddItem} className='ml-5'>
+                <Button variant="secondary" onClick={handleAddItem} style={{ marginLeft: '10px' }}>
                     Adicionar Item
                 </Button>
             </Form.Group>
 
+            <div className="d-flex justify-content-end mt-3 mb-3">
+                <Stack className="mt-3 mb-3" direction="horizontal" gap={3}>
+                    <Button
+                        variant="primary"
+                        type="submit"
+                        onSubmit={handleSubmit}
+                        className="ml-3">
+                        Enviar Doação
+                    </Button>
+                    <Button
+                        variant="danger"
+                        type="button"
+                        onClick={() => props.exibirTabela(true)}>
+                        Voltar
+                    </Button>
+                </Stack>
+            </div>
 
-            <Button
-                variant="danger"
-                type="button"
-                onClick={() => {
-                    props.exibirTabela(true);
-                }}
-            >
-                Voltar
-            </Button>
-            <Button variant="primary" type="submit" onSubmit={handleSubmit} gap={3} >
-                Enviar Doação
-            </Button>
+            
         </Form>
     );
 };

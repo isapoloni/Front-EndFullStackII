@@ -63,7 +63,7 @@ export default function TableCategoria(props) {
         fullWidth
         type="text"
         id="termoBusca"
-        placeholder="Buscar"
+        placeholder="Buscar Categoria"
         onChange={filtrarCategorias}
         InputProps={{
           startAdornment: (

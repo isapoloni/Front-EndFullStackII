@@ -23,7 +23,8 @@ import {
   Paper,
   IconButton,
   TablePagination,
-  Popover,
+  InputAdornment,
+  TextField
 } from '@mui/material';
 import { MdModeEdit } from 'react-icons/md';
 import { HiTrash } from 'react-icons/hi';
@@ -88,6 +89,23 @@ export default function TableDoacao(props) {
       </Button>
 
       <InputGroup className="mt-2">
+        <TextField
+          fullWidth
+          type="text"
+          id="termoBusca"
+          placeholder="Busque aqui o doador pelo nome"
+          onChange={filtrarDoacoesPorCPF}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <RiSearchLine />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </InputGroup>
+
+      {/* <InputGroup className="mt-2">
         <FormControl
           type="text"
           id="termoBusca"
@@ -97,7 +115,7 @@ export default function TableDoacao(props) {
         <InputGroup.Text>
           <RiSearchLine />
         </InputGroup.Text>
-      </InputGroup>
+      </InputGroup> */}
 
       <TableContainer component={Paper} className="mt-5">
         <Table size="small" className="custom-table">

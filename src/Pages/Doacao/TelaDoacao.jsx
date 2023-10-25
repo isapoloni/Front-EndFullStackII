@@ -45,9 +45,13 @@ export default function TelaDoacao(props) {
             if (Array.isArray(dados)) {
                 setDoacoes(dados);
             } else {
-                // Lógica para lidar com outros casos, se necessário.
             }
         });
+    }
+
+    function exibirTabelaEAtualizarDados() {
+        setExibirTabela(true);
+        buscarDoacao();
     }
     
 
@@ -70,6 +74,7 @@ export default function TelaDoacao(props) {
                             // listaProdutos={produtos}
                             // setProdutos={setProdutos}
                             exibirTabela={setExibirTabela}
+                            dadosAtualizados={exibirTabelaEAtualizarDados}
                             // modoEdicao={modoEdicao}
                             // editar={prepararTela}
                             // setModoEdicao={setModoEdicao}
